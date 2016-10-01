@@ -13,6 +13,8 @@ import {
 import Landing from './app/components/Landing';
 import Dashboard from './app/components/Dashboard';
 import { globals } from './app/styles';
+import Login from './app/components/accounts/Login';
+import Register from './app/components/accounts/Register';
 
 class assemblies extends Component {
   render() {
@@ -24,11 +26,19 @@ class assemblies extends Component {
           switch(route.name){
             case 'Landing':
               return( 
-                < Landing navigator={navigator} />
-            );
+                < Landing navigator={navigator}/>
+              );
             case 'Dashboard':
               return(
                 < Dashboard navigator={navigator} />
+              );
+            case 'Register':
+              return(
+                < Register navigator={navigator} />
+              );
+            case 'Login':
+              return(
+                < Login navigator={navigator} />
               );
 
           }

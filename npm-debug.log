@@ -1,0 +1,76 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/5.0.0/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '–g',
+1 verbose cli   'deployd' ]
+2 info using npm@3.3.9
+3 info using node@v5.0.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData –g
+8 silly fetchPackageMetaData deployd
+9 silly fetchOtherPackageData –g
+10 silly cache add args [ '–g', null ]
+11 verbose cache add spec –g
+12 silly fetchNamedPackageData deployd
+13 silly mapToRegistry name deployd
+14 silly mapToRegistry using default registry
+15 silly mapToRegistry registry https://registry.npmjs.org/
+16 silly mapToRegistry uri https://registry.npmjs.org/deployd
+17 silly cache add parsed spec Result {
+17 silly cache add   raw: '–g',
+17 silly cache add   scope: null,
+17 silly cache add   name: null,
+17 silly cache add   rawSpec: '–g',
+17 silly cache add   spec: '/Users/rhinds/Documents/ReactNativeProjects/assemblies/–g',
+17 silly cache add   type: 'local' }
+18 verbose request uri https://registry.npmjs.org/deployd
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 12:34:33 PM
+21 verbose request id ebf134cc70d38986
+22 http request GET https://registry.npmjs.org/deployd
+23 error addLocal Could not install /Users/rhinds/Documents/ReactNativeProjects/assemblies/–g
+24 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open '/Users/rhinds/Documents/ReactNativeProjects/assemblies/–g'
+24 silly fetchPackageMetaData     at Error (native)
+24 silly fetchPackageMetaData  error for –g { [Error: ENOENT: no such file or directory, open '/Users/rhinds/Documents/ReactNativeProjects/assemblies/–g']
+24 silly fetchPackageMetaData   errno: -2,
+24 silly fetchPackageMetaData   code: 'ENOENT',
+24 silly fetchPackageMetaData   syscall: 'open',
+24 silly fetchPackageMetaData   path: '/Users/rhinds/Documents/ReactNativeProjects/assemblies/–g' }
+25 http 400 https://registry.npmjs.org/deployd
+26 verbose headers {}
+27 silly get cb [ 400, {} ]
+28 silly fetchPackageMetaData Error: 400 Bad Request
+28 silly fetchPackageMetaData     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+28 silly fetchPackageMetaData     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:215:9)
+28 silly fetchPackageMetaData     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+28 silly fetchPackageMetaData     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+28 silly fetchPackageMetaData     at emitTwo (events.js:87:13)
+28 silly fetchPackageMetaData     at Request.emit (events.js:172:7)
+28 silly fetchPackageMetaData     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1082:10)
+28 silly fetchPackageMetaData     at emitOne (events.js:82:20)
+28 silly fetchPackageMetaData     at Request.emit (events.js:169:7)
+28 silly fetchPackageMetaData     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+28 silly fetchPackageMetaData  error for deployd { [Error: 400 Bad Request] statusCode: 400, code: 'E400' }
+29 silly rollbackFailedOptional Starting
+30 silly rollbackFailedOptional Finishing
+31 silly runTopLevelLifecycles Starting
+32 silly runTopLevelLifecycles Finishing
+33 silly install printInstalled
+34 verbose stack Error: ENOENT: no such file or directory, open '/Users/rhinds/Documents/ReactNativeProjects/assemblies/–g'
+34 verbose stack     at Error (native)
+35 verbose cwd /Users/rhinds/Documents/ReactNativeProjects/assemblies
+36 error Darwin 14.5.0
+37 error argv "/usr/local/Cellar/node/5.0.0/bin/node" "/usr/local/bin/npm" "install" "–g" "deployd"
+38 error node v5.0.0
+39 error npm  v3.3.9
+40 error path /Users/rhinds/Documents/ReactNativeProjects/assemblies/–g
+41 error code ENOENT
+42 error errno -2
+43 error syscall open
+44 error enoent ENOENT: no such file or directory, open '/Users/rhinds/Documents/ReactNativeProjects/assemblies/–g'
+44 error enoent This is most likely not a problem with npm itself
+44 error enoent and is related to npm not being able to find a file.
+45 verbose exit [ -2, true ]

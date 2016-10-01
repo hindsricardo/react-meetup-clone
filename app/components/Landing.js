@@ -20,17 +20,31 @@ const styles = landingStyles;
 class Landing extends Component{
   constructor(){
     super();
-    this.visitDashboard = this.visitDashboard.bind(this);
+    this.visitLogin = this.visitLogin.bind(this);
+    this.visitRegister = this.visitRegister.bind(this);
   }
-  visitDashboard(){
+  visitLogin(){
     this.props.navigator.push({
-      name: 'Dashboard'
+      name: 'Login'
     });
   }
+
+  visitRegister(){
+    this.props.navigator.push({
+      name: 'Register'
+    });
+  }
+
   render(){
     return (
       <View style={styles.container} >
-        <View style={styles.container} >
+        <View style={styles.container}>
+          <Image
+            style={styles.backgroundImage}
+            source={{ uri: BackgroundImage }}
+          />
+        </View>
+        <View style={globals.flexCenter} >
           <Image style={styles.logo} source={{uri:Logo}} />
           <Text style={[globals.lightText, globals.h2, globals.mb2]} >
             assemblies
@@ -39,9 +53,23 @@ class Landing extends Component{
             Where Developers Connect
           </Text>
         </View>
-        <TouchableOpacity style={globals.button} onPress={this.visitDashboard}>
-          <Icon name='person' size={36} color='white'/>
-          <Text>Go to the Dashboard</Text>
+        <TouchableOpacity
+          style={[globals.button, globals.inactive, styles.loginButton]}
+          onPress={this.visitLogin}
+        >
+          <Icon name='lock' size={36} color={Colors.brandPrimary} />
+          <Text style={[globals.buttonText, globals.primaryText]}>
+            Login
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={globals.button}
+          onPress={this.visitRegister}
+        >
+          <Icon name='person' size={36} color='white' />
+          <Text style={globals.buttonText}>
+            Create an account
+          </Text>
         </TouchableOpacity>
       </View>
     )
