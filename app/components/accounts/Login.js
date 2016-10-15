@@ -1,20 +1,21 @@
 /* application/components/accounts/Login.js */
 import React, { Component } from 'react';
-import {API, DEV} from '../../config';
-import Header from  '../../fixtures';
 import {
   Text,
   View,
   ScrollView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import { extend } from 'underscore';
-
+import {API, DEV} from '../../config';
 import BackButton from '../../shared/BackButton';
 import Colors from '../../styles/colors';
 import NavigationBar from 'react-native-navbar';
 import { globals, formStyles } from '../../styles';
+import {Headers, secureHeaders} from  '../../fixtures';
+
 
 const styles = formStyles;
 
@@ -33,16 +34,20 @@ class Login extends Component{
   }
   loginUser(){
     /* TODO: login user with username and password */
-    fetch('${API}/user/login', {
+    fetch(API+'/users/login', {
       method: 'POST',
-      headers: Header,
+      headers: Headers,
       body: JSON.stringify({
         username: this.state.email,
-        password: this.state.password
+        password: this.state.password,
       })
     })
     .then(response => response.json())
-    .then(data => this.loginStatus(data))
+    .then( () => { 
+      console.log(response.token);
+      AsyncStorage.setItem('UUID', response.token);
+    })
+    .then(data => this.loginStatus(response))
     .catch(err => this.connectionError())
     .done();
   }
@@ -51,20 +56,19 @@ class Login extends Component{
     if (response.status === 401){
       this.setState({ errorMsg: 'Email or password was incorrect.' });
     } else {
-      this.fetchUserInfo(response.id)
+      this.fetchUserInfo()
     }
   }
-  fetchUserInfo(sid){
-    fetch(`${API}/users/me`, { headers: extend(Header, { 'Set-Cookie': `sid=${sid}`}) })
+  fetchUserInfo(){
+    fetch(API+`/users/me`, { headers: secureHeaders })
     .then(response => response.json())
-    .then(user => this.updateUserInfo(user))
+    .then(() => {
+      if (DEV) { console.log('Logged in user:', response.data[0]); }
+      this.props.updateUser(response.data[0]);
+    })
+    .then(() => {if(response.success == 'yes'){ this.props.navigator.push({ name: 'Dashboard' })}})
     .catch(err => this.connectionError())
     .done();
-  }
-  updateUserInfo(user){
-    if (DEV) { console.log('Logged in user:', user); }
-    this.props.updateUser(user);
-    this.props.navigator.push({ name: 'Dashboard' })
   }
   connectionError(){
     this.setState({ errorMsg: 'Connection error.'})
@@ -86,8 +90,7 @@ class Login extends Component{
         <NavigationBar
           leftButton={<BackButton handlePress={this.goBack} />}
           title={titleConfig}
-          tintColor={Colors.brandPrimary}
-        />
+          tintColor={Colors.brandPrimary} />
         <ScrollView style={styles.container}>
           <Text style={styles.h3}>
             Login with your email and password.

@@ -1,4 +1,5 @@
 import { flatten } from 'underscore';
+import {AsyncStorage} from 'react-native';
 
 export const SolidColors = [
   'red',
@@ -11,13 +12,16 @@ export const SolidColors = [
   'green',
 ];
 
-export const Headers = { 'Content-Type': 'application/json' };
-
 export const BackgroundImage = 'https://s3-us-west-2.amazonaws.com/assembliesapp/welcome%402x.png';
 
 export const Headers = {
   'Content-Type': 'application/json'
 };
+
+export const secureHeaders = {
+  'Content-Type': 'application/json',
+  'token': AsyncStorage.getItem('UUID')
+}
 
 export const DefaultAvatar = 'https://confluence.slac.stanford.edu/s/en_GB/5996/4a6343ec7ed8542179d6c78fa7f87c01f81da016.20/_/images/icons/profilepics/default.png';
 export const ReactLogo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/2000px-React.js_logo.svg.png';

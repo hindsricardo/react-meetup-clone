@@ -5,7 +5,8 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
  } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -22,7 +23,16 @@ class Landing extends Component{
     super();
     this.visitLogin = this.visitLogin.bind(this);
     this.visitRegister = this.visitRegister.bind(this);
+    AsyncStorage.getItem('UUID', (err, obj) => {
+      if(obj) {
+        this.props.navigator.push({
+          name: 'Dashboard'
+        });
+      }
+    })
   }
+      
+
   visitLogin(){
     this.props.navigator.push({
       name: 'Login'

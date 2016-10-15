@@ -25,8 +25,8 @@ class Register extends Component{
         <NavigationBar
           title={titleConfig}
           tintColor={Colors.brandPrimary}
-          leftButton={<BackButton handlePress={this.goBack}/>}
-        />
+          leftButton={<BackButton handlePress={this.goBack}/>} />
+          
         <View style={globals.flexCenter}>
           <Text style={globals.h2}>
             Register

@@ -7,7 +7,8 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  Navigator
+  Navigator,
+  AsyncStorage
 } from 'react-native';
 
 import Landing from './app/components/Landing';
@@ -17,6 +18,16 @@ import Login from './app/components/accounts/Login';
 import Register from './app/components/accounts/Register';
 
 class assemblies extends Component {
+  constructor(){
+    super();
+    this.updateUser = this.updateUser.bind(this);
+    this.state = {
+      user: null
+    };
+  }
+  updateUser(user) {
+    this.setState({ user: user });
+  }
   render() {
     return (
       <Navigator
@@ -26,19 +37,34 @@ class assemblies extends Component {
           switch(route.name){
             case 'Landing':
               return( 
-                < Landing navigator={navigator}/>
+                <Landing navigator={navigator}/>
               );
             case 'Dashboard':
               return(
-                < Dashboard navigator={navigator} />
+                <Dashboard 
+                  updateUser={this.updateUser}
+                  navigator={navigator}
+                  user={this.state.user}
+                />
               );
             case 'Register':
               return(
-                < Register navigator={navigator} />
+                <Register navigator={navigator} />
+              );
+            case 'RegisterConfirmation':
+              return (
+                <RegisterConfirmation
+                  {...route}
+                  updateUser={this.updateUser}
+                  navigator={navigator}
+                />
               );
             case 'Login':
               return(
-                < Login navigator={navigator} />
+                <Login 
+                navigator={navigator} 
+                updateUser={this.updateUser}
+                />
               );
 
           }
