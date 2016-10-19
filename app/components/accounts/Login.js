@@ -43,32 +43,23 @@ class Login extends Component{
       })
     })
     .then(response => response.json())
-    .then( () => { 
-      console.log(response.token);
-      AsyncStorage.setItem('UUID', response.token);
-    })
-    .then(data => this.loginStatus(response))
+    .then(data => this.loginStatus(data))
     .catch(err => this.connectionError())
     .done();
   }
 
-  loginStatus(response){
-    if (response.status === 401){
+  loginStatus(sponse){
+    if (sponse.status === 401){
       this.setState({ errorMsg: 'Email or password was incorrect.' });
     } else {
-      this.fetchUserInfo()
+      AsyncStorage.setItem('UUID', sponse.token);
+      this.updateUserInfo(sponse.data[0]);
     }
   }
-  fetchUserInfo(){
-    fetch(API+`/users/me`, { headers: secureHeaders })
-    .then(response => response.json())
-    .then(() => {
-      if (DEV) { console.log('Logged in user:', response.data[0]); }
-      this.props.updateUser(response.data[0]);
-    })
-    .then(() => {if(response.success == 'yes'){ this.props.navigator.push({ name: 'Dashboard' })}})
-    .catch(err => this.connectionError())
-    .done();
+  updateUserInfo(user){
+    if (DEV) { console.log('Logged in user:', user); }
+    this.props.updateUser(user);
+    this.props.navigator.push({ name: 'Dashboard' })
   }
   connectionError(){
     this.setState({ errorMsg: 'Connection error.'})
