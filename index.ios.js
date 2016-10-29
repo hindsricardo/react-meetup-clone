@@ -21,9 +21,7 @@ class assemblies extends Component {
   constructor(){
     super();
     this.updateUser = this.updateUser.bind(this);
-    this.state = {
-      user: null
-    };
+    this.state = { user: null };
   }
   updateUser(user) {
     this.setState({ user: user });
@@ -62,8 +60,8 @@ class assemblies extends Component {
             case 'Login':
               return(
                 <Login 
-                navigator={navigator} 
                 updateUser={this.updateUser}
+                navigator={navigator} 
                 />
               );
 

@@ -23,7 +23,7 @@ class Landing extends Component{
     super();
     this.visitLogin = this.visitLogin.bind(this);
     this.visitRegister = this.visitRegister.bind(this);
-    AsyncStorage.getItem('UUID', (err, obj) => {
+    AsyncStorage.getItem('UUID8', (err, obj) => {
       if(obj) {
         this.props.navigator.push({
           name: 'Dashboard'

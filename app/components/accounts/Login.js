@@ -40,6 +40,10 @@ class Login extends Component{
       body: JSON.stringify({
         username: this.state.email,
         password: this.state.password,
+        lat: 40.7127837,
+        lng: -74.0059413,
+        city_long_name: "New York",
+        state_short_name: "NY"
       })
     })
     .then(response => response.json())
@@ -52,17 +56,23 @@ class Login extends Component{
     if (sponse.status === 401){
       this.setState({ errorMsg: 'Email or password was incorrect.' });
     } else {
-      AsyncStorage.setItem('UUID', sponse.token);
+      if(sponse.token){
+        AsyncStorage.setItem('UUID8', sponse.token);
+      }
       this.updateUserInfo(sponse.data[0]);
     }
   }
   updateUserInfo(user){
     if (DEV) { console.log('Logged in user:', user); }
     this.props.updateUser(user);
-    this.props.navigator.push({ name: 'Dashboard' })
+    this.changescene();
   }
   connectionError(){
     this.setState({ errorMsg: 'Connection error.'})
+  }
+
+  changescene(){
+    this.props.navigator.push({ name: 'Dashboard' });
   }
 
   goBack(){
