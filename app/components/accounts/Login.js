@@ -9,7 +9,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import { extend } from 'underscore';
-import {API, DEV} from '../../config';
+import {API, DEV, stoargeKey} from '../../config';
 import BackButton from '../../shared/BackButton';
 import Colors from '../../styles/colors';
 import NavigationBar from 'react-native-navbar';
@@ -57,7 +57,7 @@ class Login extends Component{
       this.setState({ errorMsg: 'Email or password was incorrect.' });
     } else {
       if(sponse.token){
-        AsyncStorage.setItem('UUID8', sponse.token);
+        AsyncStorage.setItem( stoargeKey, sponse.token);
       }
       this.updateUserInfo(sponse.data[0]);
     }

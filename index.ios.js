@@ -16,13 +16,23 @@ import Dashboard from './app/components/Dashboard';
 import { globals } from './app/styles';
 import Login from './app/components/accounts/Login';
 import Register from './app/components/accounts/Register';
+import {stoargeKey} from './app/config';
 
 class assemblies extends Component {
   constructor(){
     super();
+    this.logout = this.logout.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.state = { user: null };
   }
+
+  logout(){
+    AsyncStorage.removeItem(stoargeKey, ()=>{
+      this.nav.push({ name: 'Landing' });
+      this.updateUser(null);
+    });
+  }
+
   updateUser(user) {
     this.setState({ user: user });
   }
@@ -30,6 +40,7 @@ class assemblies extends Component {
     return (
       <Navigator
         style={globals.flex}
+        ref={(el) => this.nav = el }
         initialRoute={{name:'Landing'}}
         renderScene={(route, navigator) => {
           switch(route.name){
@@ -43,6 +54,7 @@ class assemblies extends Component {
                   updateUser={this.updateUser}
                   navigator={navigator}
                   user={this.state.user}
+                  logout={this.logout}
                 />
               );
             case 'Register':

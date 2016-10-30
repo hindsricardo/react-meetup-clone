@@ -17,13 +17,14 @@ import {landingStyles} from '../styles';
 const BackgroundImage = 'https://s3-us-west-2.amazonaws.com/assembliesapp/welcome%402x.png';
 const Logo = 'https://s3-us-west-2.amazonaws.com/assembliesapp/logo.png';
 const styles = landingStyles;
+import {stoargeKey} from  '../config';
 
 class Landing extends Component{
   constructor(){
     super();
     this.visitLogin = this.visitLogin.bind(this);
     this.visitRegister = this.visitRegister.bind(this);
-    AsyncStorage.getItem('UUID8', (err, obj) => {
+    AsyncStorage.getItem(stoargeKey, (err, obj) => {
       if(obj) {
         this.props.navigator.push({
           name: 'Dashboard'

@@ -6,6 +6,8 @@ import { TabBarItemIOS } from 'react-native-vector-icons/Ionicons';
 import ActivityView from './activity/ActivityView';
 import MessagesView from './messages/MessagesView';
 import ProfileView from './profile/ProfileView';
+import { Headers } from '../fixtures';
+import { API } from '../config';
 
 class Dashboard extends Component{
   constructor(){
@@ -14,8 +16,10 @@ class Dashboard extends Component{
       selectedTab: 'Activity'
     }
   }
+
   render(){
     let { user } = this.props;
+    let {logout} = this.props;
     return (
       <TabBarIOS>
         <TabBarItemIOS
@@ -40,7 +44,7 @@ class Dashboard extends Component{
           iconName='ios-person'
           onPress={() => this.setState({ selectedTab: 'Profile' })}
         >
-          <ProfileView currentUser={user} />
+          <ProfileView currentUser={user} logout={logout}/>
         </TabBarItemIOS>
       </TabBarIOS>
     )
