@@ -38,8 +38,8 @@ class Login extends Component{
       method: 'POST',
       headers: Headers,
       body: JSON.stringify({
-        username: this.state.email,
-        password: this.state.password,
+        username: this.state.email.trim(),
+        password: this.state.password.trim(),
         lat: 40.7127837,
         lng: -74.0059413,
         city_long_name: "New York",
