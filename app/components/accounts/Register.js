@@ -9,6 +9,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import BackButton from '../../shared/BackButton';
 import Colors from '../../styles/colors';
 import { globals } from '../../styles';
+import Config from 'react-native-config'
+const key = Config.GOOGLE_PLACES_API_KEY,
 
 class Register extends Component{
   constructor(){
