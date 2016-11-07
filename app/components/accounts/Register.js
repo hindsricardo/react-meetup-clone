@@ -36,23 +36,30 @@ class Register extends Component{
     this.props.navigator.pop();
   }
   selectLocation(data, details){
-    /* TODO: handle location selection */
+    if ( ! details ) { return; }
+    let location = {
+      ...details.geometry.location,
+      city: find(details.address_components, (c) => (
+        isEqual(c.types[0], 'locality')
+      )),
+      state: find(details.address_components, (c) => (
+        isEqual(c.types[0], 'administrative_area_level_1')
+      )),
+      county: find(details.address_components, (c) => (
+        isEqual(c.types[0],'administrative_area_level_2')
+      )),
+      formattedAddress: details.formatted_address
+    };
+    this.setState({ location });
   }
+  
   handleSubmit(){
-    /* TODO: handle submit and direct to pt. 1 */
+    this.props.navigator.push({
+      name: 'RegisterConfirmation',
+      ...this.state
+    })
   }
 
-  getGooglePlacesKey(){
-    fetch(API+'/users/googleplaceskey/', {
-      method:'GET',
-      headers: Headers,
-    })
-    .then(response => response.json())
-    .then(() => {
-      return response
-    })
-    .done();
-  }
   render(){
     let titleConfig = { title: 'CreateAccount', tintColor: 'white' };
     return (

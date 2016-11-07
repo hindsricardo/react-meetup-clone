@@ -16,6 +16,7 @@ import Dashboard from './app/components/Dashboard';
 import { globals } from './app/styles';
 import Login from './app/components/accounts/Login';
 import Register from './app/components/accounts/Register';
+import RegisterConfirmation from './app/components/accounts/RegisterConfirmation';
 import {stoargeKey} from './app/config';
 
 class assemblies extends Component {

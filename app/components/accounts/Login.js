@@ -39,11 +39,7 @@ class Login extends Component{
       headers: Headers,
       body: JSON.stringify({
         username: this.state.email.trim(),
-        password: this.state.password.trim(),
-        lat: 40.7127837,
-        lng: -74.0059413,
-        city_long_name: "New York",
-        state_short_name: "NY"
+        password: this.state.password.trim()
       })
     })
     .then(response => response.json())

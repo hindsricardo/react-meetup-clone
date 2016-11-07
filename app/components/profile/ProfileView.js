@@ -28,16 +28,16 @@ class ProfileView extends Component{
           <View style={styles.flexRow}>
             <TouchableOpacity style={[globals.flexCenter, globals.pv1]}>
               <Image 
-                source={{uri: currentUser.m.avatar}} 
+                source={{uri: currentUser.user.avatar}} 
                 style={styles.avatar}
               />
             </TouchableOpacity>
             <View style={styles.infoContainer}>
               <Text style={globals.h4}>
-                {currentUser.m.firstName} {currentUser.m.lastName}
+                {currentUser.user.firstName} {currentUser.user.lastName}
               </Text>
               <Text style={globals.h5}>
-                { currentUser.n.city_long_name}, { currentUser.n.state_short_name}
+                { currentUser.location.city_long_name}, { currentUser.location.state_short_name}
               </Text>
             </View>
           </View>
