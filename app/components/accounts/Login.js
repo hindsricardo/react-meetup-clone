@@ -15,6 +15,7 @@ import Colors from '../../styles/colors';
 import NavigationBar from 'react-native-navbar';
 import { globals, formStyles } from '../../styles';
 import {Headers, secureHeaders} from  '../../fixtures';
+import  BusyIndicator from 'react-native-busy-indicator';
 
 
 const styles = formStyles;
@@ -132,8 +133,9 @@ class Login extends Component{
         <TouchableOpacity 
           style={styles.submitButton} 
           onPress={this.loginUser}
-        >
-          <Text style={globals.largeButtonText}>Login</Text>
+          >
+          <Text style={globals.largeButtonText}>Login <BusyIndicator /></Text>
+          
         </TouchableOpacity>
       </View>
     )

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import  BusyIndicator from 'react-native-busy-indicator';
 import ImagePicker from 'react-native-image-picker';
 import NavigationBar from 'react-native-navbar';
 import Dropdown, { Select, Option, OptionList } from 'react-native-selectme';
@@ -169,6 +170,7 @@ class RegisterConfirm extends Component{
           <Text style={globals.largeButtonText}>
             Create Account
           </Text>
+          <BusyIndicator />
         </TouchableOpacity>
       </View>
     )
