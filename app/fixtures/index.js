@@ -1,5 +1,7 @@
 import { flatten } from 'underscore';
 import {AsyncStorage} from 'react-native';
+import {storageKey} from '../config/index'
+import store from 'react-native-simple-store';
 
 export const SolidColors = [
   'red',
@@ -18,10 +20,6 @@ export const Headers = {
   'Content-Type': 'application/json'
 };
 
-export const secureHeaders = {
-  'Content-Type': 'application/json',
-  'token': AsyncStorage.getItem('UUID')
-}
 
 export const DefaultAvatar = 'https://confluence.slac.stanford.edu/s/en_GB/5996/4a6343ec7ed8542179d6c78fa7f87c01f81da016.20/_/images/icons/profilepics/default.png';
 export const ReactLogo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/2000px-React.js_logo.svg.png';
@@ -103,6 +101,8 @@ export const currentUser = {
   	"formattedAddress": "New York, NY, USA"
   }
 };
+
+
 
 function randomDate(){
   let d1 = new Date().valueOf();

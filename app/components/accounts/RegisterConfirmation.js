@@ -18,7 +18,7 @@ import { uniq, extend } from 'underscore';
 import Colors from '../../styles/colors';
 import { Headers } from '../../fixtures';
 import BackButton from '../../shared/BackButton';
-import { DEV, API, stoargeKey} from '../../config';
+import { DEV, API, storageKey} from '../../config';
 import { Technologies, ImageOptions, DefaultAvatar } from '../../fixtures';
 import { formStyles, globals, selectStyles, optionTextStyles, overlayStyles } from '../../styles';
 import TechnologyList from '../../shared/TechnologyList';
@@ -64,10 +64,16 @@ class RegisterConfirm extends Component{
     headers: Headers,
     body: JSON.stringify(user)
   })
-  .then(response => response.json())
-  .then( user => {
+  .then(response => response.json().then((data)=>{
+      AsyncStorage.setItem(storageKey, data.token);
+      AsyncStorage.setItem("currentUser", JSON.stringify(data.data));
+      if(data.token){
+        this.props.updatedToken(data.token);
+      }
     this.props.updateUser(user.data[0]);
-    this.props.navigator.push({ name: 'Dashboard' });
+  }))
+  .then( ()=>{
+        this.props.navigator.push({ name: 'Dashboard' });
   })
   .catch(err => {})
   .done();

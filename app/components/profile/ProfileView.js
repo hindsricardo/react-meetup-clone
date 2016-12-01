@@ -17,6 +17,7 @@ const styles = profileStyles;
 class ProfileView extends Component{
   render() {
     let { currentUser } = this.props;
+    let {location} = this.props;
     let titleConfig = { title: 'Profile', tintColor: 'white' };
     return (
       <View style={[globals.flexContainer, globals.inactive]}>
@@ -28,16 +29,16 @@ class ProfileView extends Component{
           <View style={styles.flexRow}>
             <TouchableOpacity style={[globals.flexCenter, globals.pv1]}>
               <Image 
-                source={{uri: currentUser.user.avatar}} 
+                source={{uri: currentUser.avatar}} 
                 style={styles.avatar}
               />
             </TouchableOpacity>
             <View style={styles.infoContainer}>
               <Text style={globals.h4}>
-                {currentUser.user.firstName} {currentUser.user.lastName}
+                {currentUser.firstName} {currentUser.lastName}
               </Text>
               <Text style={globals.h5}>
-                { currentUser.location.city_long_name}, { currentUser.location.state_short_name}
+                { location.city_long_name}, { location.state_short_name}
               </Text>
             </View>
           </View>

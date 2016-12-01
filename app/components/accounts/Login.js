@@ -9,13 +9,14 @@ import {
   AsyncStorage
 } from 'react-native';
 import { extend } from 'underscore';
-import {API, DEV, stoargeKey} from '../../config';
+import {API, DEV, storageKey} from '../../config';
 import BackButton from '../../shared/BackButton';
 import Colors from '../../styles/colors';
 import NavigationBar from 'react-native-navbar';
 import { globals, formStyles } from '../../styles';
 import {Headers, secureHeaders} from  '../../fixtures';
 import  BusyIndicator from 'react-native-busy-indicator';
+import store from 'react-native-simple-store';
 
 
 const styles = formStyles;
@@ -34,6 +35,7 @@ class Login extends Component{
     };
   }
   loginUser(){
+    
     /* TODO: login user with username and password */
     fetch(API+'/users/login', {
       method: 'POST',
@@ -43,8 +45,19 @@ class Login extends Component{
         password: this.state.password.trim()
       })
     })
-    .then(response => response.json())
-    .then(data => this.loginStatus(data))
+    .then(response => response.json().then((data)=>{
+      
+      AsyncStorage.setItem(storageKey, data.token);
+      AsyncStorage.setItem("currentUser", JSON.stringify(data.user));
+      AsyncStorage.setItem("location", JSON.stringify(data.location));
+      if(data.token){
+        this.props.updatedToken(data.token);
+      }
+      this.loginStatus(data)
+    }))
+    .then( ()=>{
+      this.changescene();
+    })
     .catch(err => this.connectionError())
     .done();
   }
@@ -53,16 +66,14 @@ class Login extends Component{
     if (sponse.status === 401){
       this.setState({ errorMsg: 'Email or password was incorrect.' });
     } else {
-      if(sponse.token){
-        AsyncStorage.setItem( stoargeKey, sponse.token);
-      }
-      this.updateUserInfo(sponse.data[0]);
+      this.updateUserInfo(sponse.user, sponse.location);
     }
   }
-  updateUserInfo(user){
+
+  updateUserInfo(user, location){
     if (DEV) { console.log('Logged in user:', user); }
     this.props.updateUser(user);
-    this.changescene();
+    this.props.updateLocation(location);
   }
   connectionError(){
     this.setState({ errorMsg: 'Connection error.'})
@@ -134,7 +145,7 @@ class Login extends Component{
           style={styles.submitButton} 
           onPress={this.loginUser}
           >
-          <Text style={globals.largeButtonText}>Login <BusyIndicator /></Text>
+          <Text style={globals.largeButtonText}>Login </Text>
           
         </TouchableOpacity>
       </View>

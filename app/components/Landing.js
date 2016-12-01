@@ -17,22 +17,35 @@ import {landingStyles} from '../styles';
 const BackgroundImage = 'https://s3-us-west-2.amazonaws.com/assembliesapp/welcome%402x.png';
 const Logo = 'https://s3-us-west-2.amazonaws.com/assembliesapp/logo.png';
 const styles = landingStyles;
-import {stoargeKey} from  '../config';
+import {storageKey} from  '../config';
 
 class Landing extends Component{
   constructor(){
     super();
     this.visitLogin = this.visitLogin.bind(this);
     this.visitRegister = this.visitRegister.bind(this);
-    AsyncStorage.getItem(stoargeKey, (err, obj) => {
-      if(obj) {
-        this.props.navigator.push({
+    AsyncStorage.getItem(storageKey, (err, obj) => {
+      this.props.updatedToken(obj);
+      AsyncStorage.getItem("currentUser", (err, data) => {
+        this.props.updateUser(JSON.parse(data));
+        AsyncStorage.getItem("location", (err,result) => {
+          this.props.updateLocation(JSON.parse(result));
+        })
+      })
+      .then( () => {
+        this.visitDashboard(obj);
+      })
+    })
+
+  }
+      
+  visitDashboard(obj){
+    if(obj !== null){
+       this.props.navigator.push({
           name: 'Dashboard'
         });
       }
-    })
   }
-      
 
   visitLogin(){
     this.props.navigator.push({
