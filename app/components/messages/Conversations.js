@@ -20,8 +20,16 @@ const styles = messagesStyles;
 class Conversations extends Component{
   constructor(){
     super();
+    this.visitConversation = this.visitConversation.bind(this);
     this._renderRow = this._renderRow.bind(this);
     this.dataSource = this.dataSource.bind(this);
+  }
+
+  visitConversation(user){
+    this.props.navigator.push({
+      name:'Conversation',
+      user: user
+    })
   }
 
   _renderRow(conversation){
@@ -30,7 +38,10 @@ class Conversations extends Component{
     let otherUserID = find(userIDs, (username) => !isEqual(username, currentUser.username));
     //let user = find(this.props.users, ({ id }) => isEqual(id, otherUserID));
     return (
-      <TouchableOpacity style={globals.flexContainer}>
+      <TouchableOpacity 
+        style={globals.flexContainer}
+        onPress={()=> this.visitConversation(otherUserID)}
+      >
         <View style={globals.flexRow}>
           <Image
             style={globals.avatar}

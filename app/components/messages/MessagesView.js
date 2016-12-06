@@ -34,17 +34,7 @@ class MessagesView extends Component{
         headers: {'Content-Type': 'application/json','token': token }
       })
       .then(response => response.json().then((reply) => {
-        let conversations = [];
-        let users = []
-        for (var key in reply.result[0]) {
-          if (reply.result[0].hasOwnProperty("conversations")) {
-            conversations.push(key);
-          }
-          if (reply.result[0].hasOwnProperty("users")) {
-            users.push(key);
-          }
-        }
-        this.setState({ conversations: conversations, users: users, ready: true })
+        this.setState({conversations:reply.conversations, users:reply.users, ready: true })
       }))
       .catch(err => this.ready(err))
       .done()
