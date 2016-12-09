@@ -34,23 +34,24 @@ class Conversations extends Component{
 
   _renderRow(conversation){
     let {currentUser} = this.props;
-    let userIDs = this.props.users;
+    let userIDs = conversation.users;
     let otherUserID = find(userIDs, (username) => !isEqual(username, currentUser.username));
-    //let user = find(this.props.users, ({ id }) => isEqual(id, otherUserID));
+    let user = find(this.props.users, ({ username }) => isEqual(username, otherUserID));
+    let {token} = this.props;
     return (
       <TouchableOpacity 
         style={globals.flexContainer}
-        onPress={()=> this.visitConversation(otherUserID)}
+        onPress={()=> this.visitConversation(user)}
       >
         <View style={globals.flexRow}>
           <Image
             style={globals.avatar}
-            source={{uri: otherUserID.avatar}}
+            source={{uri: user.avatar}}
           />
           <View style={globals.flex}>
             <View style={globals.textContainer}>
               <Text style={styles.h5}>
-                {otherUserID.firstName} {otherUserID.lastName}
+                {user.firstName} {user.lastName}
               </Text>
               <Text style={styles.h6}>
                 {moment(conversation.lastMessageDate).fromNow()}

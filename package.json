@@ -12,6 +12,8 @@
     "react-native-busy-indicator": "^1.0.9",
     "react-native-google-places-autocomplete": "https://github.com/tgoldenberg/react-native-google-places-autocomplete/tarball/master",
     "react-native-image-picker": "^0.22.13",
+    "react-native-invertible-scroll-view": "^1.0.0",
+    "react-native-keyboard-spacer": "^0.3.0",
     "react-native-material-design": "^0.3.7",
     "react-native-navbar": "^1.5.1",
     "react-native-selectme": "^1.2.0",
